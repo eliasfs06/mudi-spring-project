@@ -1,0 +1,37 @@
+<html>
+<head th:replace="~{fragments :: head}"></head>
+<body>
+	<div th:replace="~{fragments :: logo}"></div>
+	<div class="container ">
+
+		<div th:replace="~{fragments :: jumbotron('Novo Pedido')}"></div>
+		<div class="card mt-3">
+			<form th:object="${novoPedidoDto}" class="card-body" action="/pedido/salvar" method="POST">
+				<div class="form-group">
+					<label for="nomeProduto">Produto</label>
+					<input class="form-control" th:errorclass="is-invalid" placeholder="Nome do produto" th:field="*{nomeProduto}" />
+					<small>Informe qual o nome do produto</small>
+					<div th:errors="*{nomeProduto}" class="invalid-feedback"></div>		
+				</div>
+				<div class="form-group">
+					<label for="urlProduto">URL da Produto</label>
+					<input class="form-control" th:errorclass="is-invalid" placeholder="URL do produto" th:field="*{urlProduto}" />
+					<small>Procure em um site o produto que você deseja e cole a URL aqui.</small>
+					<div th:errors="*{urlProduto}" class="invalid-feedback"></div>			
+				</div>
+				<div class="form-group">
+					<label for="urlImagem">Imagem</label>
+					<input class="form-control" th:errorclass="is-invalid" placeholder="URL da Imagem" th:field="*{urlImagem}" />
+					<small>Copie a URL de uma boa imagem do produto e cole aqui.</small>
+					<div th:errors="*{urlImagem}" class="invalid-feedback"></div>			
+				</div>
+				<div class="form-group">
+					<label for="descricao">Descrição</label>
+					<textarea class="form-control" placeholder="Adicione detalhes importantes para ajudar o comprador" th:field="*{descricao}" ></textarea>				
+				</div>
+				<button class="btn btn-outline-primary" type="submit">Cadastrar</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
