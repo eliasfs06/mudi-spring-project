@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.alura.mvc.mudi.dto.NovoPedidoDto;
 import br.com.alura.mvc.mudi.model.Pedido;
 import br.com.alura.mvc.mudi.model.StatusPedido;
+import br.com.alura.mvc.mudi.model.User;
 import br.com.alura.mvc.mudi.repository.PedidoRepository;
 
 @Controller
@@ -23,7 +25,10 @@ import br.com.alura.mvc.mudi.repository.PedidoRepository;
 public class PedidoController {
 	
 	@Autowired
-	PedidoRepository pedidoRepository;
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private UserRepositoy userRepositoy;
 	
 	@GetMapping("formulario")
 	public String formulario(NovoPedidoDto novoPedidoDto) {
@@ -37,8 +42,12 @@ public class PedidoController {
 			return "pedido/formulario";
 		}
 		
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = userRepositoy.findUserByName(username);
+		
 		try {
 			novoPedido.setStatus(StatusPedido.AGUARDANDO);
+			novoPedido.setUser(user);
 			pedidoRepository.save(novoPedido.toPedido(novoPedido));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +59,9 @@ public class PedidoController {
 	@GetMapping("{status}")
 	public String listarPedidos(Model model, @PathVariable String status) {
 		
-		List<Pedido> pedidos = pedidoRepository.findByStatus(status.toUpperCase());
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		List<Pedido> pedidos = pedidoRepository.findByStatus(status.toUpperCase(), username);
 		
 		model.addAttribute("pedidos", pedidos);
 		return "home"; 

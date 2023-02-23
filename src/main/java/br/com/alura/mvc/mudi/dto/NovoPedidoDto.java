@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 
 import br.com.alura.mvc.mudi.model.Pedido;
 import br.com.alura.mvc.mudi.model.StatusPedido;
+import br.com.alura.mvc.mudi.model.User;
 
 public class NovoPedidoDto {
 
@@ -16,7 +17,8 @@ public class NovoPedidoDto {
 	private String urlImagem;
 	private String descricao;
 	private StatusPedido status;
-	
+	private User user;
+
 	public Pedido toPedido(NovoPedidoDto dto) {
 		Pedido pedido = new Pedido();
 		pedido.setNomeProduto(nomeProduto);
@@ -24,6 +26,7 @@ public class NovoPedidoDto {
 		pedido.setUrlImagem(urlImagem);
 		pedido.setUrlImagem(urlImagem);
 		pedido.setStatus(status);
+		pedido.setUser(user);
 		
 		return pedido;
 	}
@@ -68,4 +71,11 @@ public class NovoPedidoDto {
 		this.status = status;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

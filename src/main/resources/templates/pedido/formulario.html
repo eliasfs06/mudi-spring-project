@@ -6,7 +6,7 @@
 
 		<div th:replace="~{fragments :: jumbotron('Novo Pedido')}"></div>
 		<div class="card mt-3">
-			<form th:object="${novoPedidoDto}" class="card-body" action="/pedido/salvar" method="POST">
+			<form th:object="${novoPedidoDto}" class="card-body" th:action="@{/pedido/salvar}" method="POST">
 				<div class="form-group">
 					<label for="nomeProduto">Produto</label>
 					<input class="form-control" th:errorclass="is-invalid" placeholder="Nome do produto" th:field="*{nomeProduto}" />
