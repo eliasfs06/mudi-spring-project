@@ -1,5 +1,5 @@
 # mudi Spring Project
-Esse sistema foi criado como projeto final para o curso de Spring MVC da Alura.
+Esse projeto é uma aplicação dos conhecimentos adquiridos no curso de Spring MVC e Spring Security da Alura.
 ## Tecnologias Usadas:
 - Spring Boot
 - Spring MVC
