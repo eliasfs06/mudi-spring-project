@@ -1,45 +1,38 @@
-package br.com.alura.mvc.mudi.model;
+package br.com.alura.mvc.mudi.dto;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
+import br.com.alura.mvc.mudi.model.User;
 import br.com.alura.mvc.mudi.securingweb.Authority;
 
-@Entity
-@Table(name="users")
-public class User {
+public class UserDto {
 	
-	@Id	
+	@NotBlank
 	private String username;
+	@NotBlank
 	private String password;
 	private Boolean enabled;
+	@NotBlank
 	private String nome;
+	@NotBlank
 	private String email;
-	
-    @ElementCollection
-    @CollectionTable(name = "authorities", joinColumns = @JoinColumn(name = "username"))
     private Set<Authority> authorities = new HashSet<>();
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Pedido> pedidos;
-	
-	public List<Pedido> getPedidos() {
-		return pedidos;
+
+	public User toUser() {
+		User user = new User();
+		user.setNome(nome);
+		user.setEmail(email);
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setEnabled(enabled);
+		user.setAuthorities(authorities);
+		
+		return user;
 	}
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -70,16 +63,13 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public Set<Authority> getAuthorities() {
 		return authorities;
 	}
+
 	public void setAuthorities(Set<Authority> authorities) {
 		this.authorities = authorities;
 	}
-	public void addAuthority(String string) {
-		authorities.add(new Authority(string));
-	}
 	
-	
-
 }

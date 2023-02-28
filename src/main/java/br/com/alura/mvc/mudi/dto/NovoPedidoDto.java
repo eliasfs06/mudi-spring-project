@@ -19,7 +19,7 @@ public class NovoPedidoDto {
 	private StatusPedido status;
 	private User user;
 
-	public Pedido toPedido(NovoPedidoDto dto) {
+	public Pedido toPedido() {
 		Pedido pedido = new Pedido();
 		pedido.setNomeProduto(nomeProduto);
 		pedido.setDescricao(descricao);

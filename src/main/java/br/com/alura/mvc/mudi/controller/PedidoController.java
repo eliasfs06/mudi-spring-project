@@ -48,7 +48,7 @@ public class PedidoController {
 		try {
 			novoPedido.setStatus(StatusPedido.AGUARDANDO);
 			novoPedido.setUser(user);
-			pedidoRepository.save(novoPedido.toPedido(novoPedido));
+			pedidoRepository.save(novoPedido.toPedido());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
