@@ -4,39 +4,22 @@
 	<div th:replace="~{fragments :: logo}"></div>
 	<div class="container ">
 
-		<div th:replace="~{fragments :: jumbotron('Meus Pedidos')}"></div>
+		<div th:replace="~{fragments :: jumbotron('Bem-vindo ao Mudi')}"></div>
 
 		<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
-				<div class="navbar-nav">
-					<a class="nav-item nav-link " href="/home" >Todos</a>
-					<a th:classappend="${status} == 'aguardando' ? 'active'" class="nav-item nav-link " href="/pedido/aguardando">Aguardando</a>
-					<a th:classappend="${status} == 'aprovado' ? 'active'" class="nav-item nav-link " href="/pedido/aprovado">Aprovado</a>
-					<a th:classappend="${status} == 'entregue' ? 'active'" class="nav-item nav-link " href="/pedido/entregue">Entregue</a>
-				</div>
-			<a href="/pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
+				<div class="navbar-nav">Últimos pedidos entregues pelo Mudi:</div>
 			</nav>
 			
 			<div class="card mb-3" th:each="pedido : ${pedidos}">
-				<th:block th:switch="${pedido.status.name()}">
-					<div th:case="'AGUARDANDO'" class="card-header alert-warning" th:text="${pedido.nomeProduto}">Nome do Produto</div>
-					<div th:case="'APROVADO'" class="card-header alert-success" th:text="${pedido.nomeProduto}">Nome do Produto</div>
-					<div th:case="'ENTREGUE'" class="card-header alert-dark" th:text="${pedido.nomeProduto}">Nome do Produto</div>
-				</th:block>
-				<div class="card-body">
+				<div class="card-header alert-dark" th:text="${pedido.nomeProduto}">Nome do Produto</div>
+			<div class="card-body">
 					<div class="row">
 						<div class="col-12 col-sm-8 mb-3">
-							<div class="row ">
-								<div class="col-md-5"><strong>Valor:</strong> <span th:text="${pedido.valorNegociado}"></span></div>
-								<div class="col-md-6"><strong>Data da entrega:</strong> <span th:text="${#temporals.format(pedido.dataDaEntrega, 'dd/MM/yyyy')}">10/02/2020</span></div>
-							</div>
+								<div>Produto:</div> 
+								<div><span class="form-control h-auto" th:text="${pedido.urlProduto}">Produto</span></div>
 							
-							<div><strong>Produto:</strong></div> 
-							<div> <input class="form-control" th:value="${pedido.urlProduto}" value="url do produto" /></div>
-							
-							<div><strong>Descrição:</strong></div>
-							<div>
-								<textarea class="form-control" th:text="${pedido.descricao}">Descrição do pedido</strong></textarea>
-							</div>
+								<div>Descrição:</div>
+								<div><span class="form-control h-auto" th:text="${pedido.descricao}">Descrição do pedido</span></div>
 						</div>
 						<div class="col-12 col-sm-4">
 							<div>
@@ -44,8 +27,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
 			</div>
 		</div>
 	</body>
 </html>
+				

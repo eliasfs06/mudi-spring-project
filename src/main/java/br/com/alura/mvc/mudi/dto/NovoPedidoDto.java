@@ -23,7 +23,7 @@ public class NovoPedidoDto {
 		Pedido pedido = new Pedido();
 		pedido.setNomeProduto(nomeProduto);
 		pedido.setDescricao(descricao);
-		pedido.setUrlImagem(urlImagem);
+		pedido.setUrlProduto(urlProduto);
 		pedido.setUrlImagem(urlImagem);
 		pedido.setStatus(status);
 		pedido.setUser(user);

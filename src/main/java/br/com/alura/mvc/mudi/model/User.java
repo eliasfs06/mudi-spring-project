@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.alura.mvc.mudi.securingweb.Authority;
 
 @Entity
@@ -32,6 +34,7 @@ public class User {
     private Set<Authority> authorities = new HashSet<>();
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+	@JsonManagedReference
 	private List<Pedido> pedidos;
 	
 	public List<Pedido> getPedidos() {

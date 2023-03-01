@@ -30,12 +30,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/novoUsuario").permitAll()
 				.antMatchers("/novoUsuario/salvar").permitAll()
+				.antMatchers("/api/**").permitAll()
 				.antMatchers("/home").permitAll()
 				.anyRequest().authenticated()
 			.and()
 				.formLogin(form -> form
 					.loginPage("/login")
-					.defaultSuccessUrl("/home", true)
+					.defaultSuccessUrl("/usuario/pedidos", true)
 					.permitAll())
 			.logout(logout -> logout.logoutUrl("/logout"))
 			.csrf().disable();

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.alura.mvc.mudi.dto.UserDto;
 import br.com.alura.mvc.mudi.model.User;
+import br.com.alura.mvc.mudi.repository.UserRepositoy;
 
 @Controller
 @RequestMapping("/novoUsuario")
