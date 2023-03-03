@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Pedido {
@@ -29,14 +31,16 @@ public class Pedido {
 	private String urlProduto;
 	private String urlImagem;
 	private String descricao;
+	
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonBackReference
+	@JsonIgnore
 	private User user;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
+	@JsonManagedReference
 	private List<Oferta> oferta;
 
 	public String getNomeProduto() {
