@@ -2,6 +2,8 @@ package br.com.alura.mvc.mudi.api;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.alura.mvc.mudi.dto.RequisicaoNovaOferta;
 import br.com.alura.mvc.mudi.model.Oferta;
 import br.com.alura.mvc.mudi.model.Pedido;
-import br.com.alura.mvc.mudi.repository.OfertaRepository;
 import br.com.alura.mvc.mudi.repository.PedidoRepository;
 
 @RestController
@@ -21,11 +22,8 @@ public class OfertaRestController {
 	@Autowired
 	private PedidoRepository pedidoRepository; 
 	
-	@Autowired
-	private OfertaRepository ofertaRepository;
-	
 	@PostMapping
-	public Oferta novaOferta(@RequestBody RequisicaoNovaOferta requisicao) {
+	public Oferta novaOferta(@Valid @RequestBody RequisicaoNovaOferta requisicao) {
 		
 		Optional<Pedido> pedidoBuscado = pedidoRepository.findById(requisicao.getPedidoId());
 		if(!pedidoBuscado.isPresent())
